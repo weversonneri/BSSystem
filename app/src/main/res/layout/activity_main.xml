@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+
+    <ListView
+        android:id="@+id/list_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <TextView
+        android:id="@+id/text_main_add_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/fab_text_background"
+        android:padding="8dp"
+        android:text="@string/text_button_main_add_service"
+        android:textColor="@color/primaryTextColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/button_main_add_service"
+        app:layout_constraintEnd_toStartOf="@+id/button_main_add_service"
+        app:layout_constraintTop_toTopOf="@+id/button_main_add_service" />
+
+    <TextView
+        android:id="@+id/text_main_add_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/fab_text_background"
+        android:padding="8dp"
+        android:text="@string/text_button_main_add_customer"
+        android:textColor="@color/primaryTextColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/button_main_add_customer"
+        app:layout_constraintEnd_toStartOf="@+id/button_main_add_customer"
+        app:layout_constraintTop_toTopOf="@+id/button_main_add_customer" />
+
+    <TextView
+        android:id="@+id/text_main_add_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/fab_text_background"
+        android:padding="8dp"
+        android:text="@string/text_button_main_add_schedule"
+        android:textColor="@color/primaryTextColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/button_main_add_schedule"
+        app:layout_constraintEnd_toStartOf="@+id/button_main_add_schedule"
+        app:layout_constraintTop_toTopOf="@+id/button_main_add_schedule" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_main_add_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/button_main_add_customer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_service"
+        app:tint="@color/whiteColor"
+        tools:ignore="VectorDrawableCompat" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_main_add_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/button_main_add_schedule"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_customer"
+        app:tint="@color/whiteColor"
+        tools:ignore="VectorDrawableCompat" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_main_add_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_schedule"
+        app:tint="@color/whiteColor"
+        tools:ignore="VectorDrawableCompat" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_main_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ic_add"
+            app:elevation="10dp"
+            app:tint="@color/whiteColor" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

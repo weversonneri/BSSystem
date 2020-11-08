@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "339800226688",
+    "firebase_url": "https://bsystem-dec16.firebaseio.com",
+    "project_id": "bsystem-dec16",
+    "storage_bucket": "bsystem-dec16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339800226688:android:4334f9180a414042575f65",
+        "android_client_info": {
+          "package_name": "com.example.bsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339800226688-536m2dod2dfjkpua1lfb3uh8ak5iadab.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bsystem",
+            "certificate_hash": "9ae6dde953f053382503ee9b5baf10c951c832fe"
+          }
+        },
+        {
+          "client_id": "339800226688-g0b0lqditn7id0aa66bdu53n2h1o5hrl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv0ddPg9EM28Is3WTnJKACoCqnzNwT3D8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339800226688-g0b0lqditn7id0aa66bdu53n2h1o5hrl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
