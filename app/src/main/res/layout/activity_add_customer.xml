@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.RegisterScheduleActivity">
+
+    tools:context=".activity.AddCustomerActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,93 +13,107 @@
         android:orientation="vertical"
         android:padding="45dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Cadastrar Cliente"
+            android:textSize="25sp" />
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome">
+            android:hint="Nome"
+            app:boxBackgroundMode="outline">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_schedule_add_name"
+                android:id="@+id/edit_cadastro_cliente_nome"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="59dp"
                 android:inputType="text" />
+
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Telefone">
+            android:hint="Telefone"
+            app:boxBackgroundMode="outline">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_schedule_add_phone"
+                android:id="@+id/edit_cadastro_cliente_telefone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"  />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Horario">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_schedule_add_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="59dp"
                 android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Data de Nascimento"
+            app:boxBackgroundMode="outline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_cadastro_cliente_data"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:inputType="number" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Serviço">
+            android:hint="Email"
+            app:counterTextColor="@color/colorPrimaryDark">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_schedule_add_service"
+                android:id="@+id/edit_cadastro_cliente_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textEmailAddress" />
+
+
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="30dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button_schedule_add_cancel"
-                android:layout_width="match_parent"
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_cadastro_cliente_cancel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/primaryDarkColor"
-                android:padding="15dp"
                 android:text="Cancelar"
-                android:textColor="@android:color/white"
-                android:textSize="15sp" />
+                app:backgroundTint="@color/primaryDarkColor" />
 
             <Space
                 android:layout_width="10dp"
                 android:layout_height="10dp" />
 
-            <Button
-                android:id="@+id/button_schedule_add_submit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_weight="1"
-                android:padding="15dp"
-                android:text="Agendar"
-                android:textColor="@android:color/white"
-                android:textSize="15sp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_cadastro_cliente_confim"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Salvar" />
+
 
         </LinearLayout>
-
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

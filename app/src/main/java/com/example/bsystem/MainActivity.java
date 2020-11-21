@@ -14,8 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bsystem.activity.ListClienteActivity;
 import com.example.bsystem.activity.ListServicosActivity;
-import com.example.bsystem.activity.RegisterScheduleActivity;
-import com.example.bsystem.adapter.ScheduleListAdapter;
+import com.example.bsystem.activity.AddScheduleActivity;
+import com.example.bsystem.adapter.ScheduleAdapter;
 import com.example.bsystem.model.Schedule;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Schedule schedule = dataSnapshot.getValue(Schedule.class);
                     arrayList.add(schedule);
                 }
-                ScheduleListAdapter arrayAdapter = new ScheduleListAdapter(MainActivity.this, R.layout.layout_list_schedule, arrayList);
+                ScheduleAdapter arrayAdapter = new ScheduleAdapter(MainActivity.this, R.layout.layout_list_schedule, arrayList);
                 MainActivity.this.mViewHolder.listView.setAdapter(arrayAdapter);
             }
 
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Schedule selectSchedule = (Schedule) adapterView.getItemAtPosition(position);
 
-                Intent intent = new Intent(MainActivity.this, RegisterScheduleActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddScheduleActivity.class);
                 intent.putExtra("schedule", selectSchedule);
 
                 startActivity(intent);
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_main_add_schedule:
-                startActivity(new Intent(MainActivity.this, RegisterScheduleActivity.class));
+                startActivity(new Intent(MainActivity.this, AddScheduleActivity.class));
                 break;
 
             case R.id.button_main_add_customer:

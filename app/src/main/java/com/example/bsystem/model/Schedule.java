@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Schedule implements Serializable {
 
+    private String id;
     private String name;
     private String phone;
     private String time;
@@ -12,7 +13,8 @@ public class Schedule implements Serializable {
     public Schedule() {
     }
 
-    public Schedule(String name, String phone, String time, String service) {
+    public Schedule( String id, String name, String phone, String time, String service) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.time = time;
@@ -22,6 +24,14 @@ public class Schedule implements Serializable {
     public Schedule(String name, String time) {
         this.name = name;
         this.time = time;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

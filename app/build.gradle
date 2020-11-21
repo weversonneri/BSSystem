@@ -4,10 +4,14 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "com.example.bsystem"
-        minSdkVersion 19
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -43,6 +47,7 @@ dependencies {
 
     implementation 'me.abhinay.input:currency-edittext:1.1'
 
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
 
 
 }

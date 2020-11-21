@@ -15,15 +15,15 @@ import com.example.bsystem.model.Schedule;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ScheduleListAdapter extends ArrayAdapter<Schedule> {
+public class ScheduleAdapter extends ArrayAdapter<Schedule> {
 
-    private static final String TAG = "ScheduleListAdapter";
+    private static final String TAG = "ScheduleAdapter";
 
     private Context mContext;
     private int mResource;
     //private int lastPosition = -1;
 
-    public ScheduleListAdapter(Context context, int resourse, ArrayList<Schedule> objects) {
+    public ScheduleAdapter(Context context, int resourse, ArrayList<Schedule> objects) {
         super(context, resourse, objects);
         mContext = context;
         mResource = resourse;

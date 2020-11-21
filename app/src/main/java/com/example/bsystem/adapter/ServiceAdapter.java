@@ -8,22 +8,22 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.bsystem.R;
-import com.example.bsystem.model.Cliente;
+import com.example.bsystem.model.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ClienteListAdapter extends ArrayAdapter<Cliente> {
+public class ServiceAdapter extends ArrayAdapter<Service> {
 
-    private static final String TAG = "ClienteListAdapter";
+    private static final String TAG = "ServiceAdapter";
 
     private Context mContext;
     private int mResource;
     //private int lastPosition = -1;
 
-    public ClienteListAdapter(Context context, int resourse, ArrayList<Cliente> objects) {
+    public ServiceAdapter(Context context, int resourse, ArrayList<Service> objects) {
         super(context, resourse, objects);
         mContext = context;
         mResource = resourse;
@@ -32,10 +32,10 @@ public class ClienteListAdapter extends ArrayAdapter<Cliente> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        String nome = getItem(position).getNome();
-        String telefone = getItem(position).getTelefone();
+        String name = getItem(position).getName();
+        String price = getItem(position).getPrice();
 
-        Cliente cliente = new Cliente(nome, telefone);
+        Service service = new Service(name, price);
 
         final View result;
 
@@ -45,8 +45,8 @@ public class ClienteListAdapter extends ArrayAdapter<Cliente> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             mViewHolder = new ViewHolder();
-            mViewHolder.nome = (TextView) convertView.findViewById(R.id.text_list_cliente_nome);
-            mViewHolder.telefone = (TextView) convertView.findViewById(R.id.text_list_cliente_telefone);
+            mViewHolder.nome = (TextView) convertView.findViewById(R.id.text_list_servico_nome);
+            mViewHolder.valor = (TextView) convertView.findViewById(R.id.text_list_servico_valor);
 
             result = convertView;
             convertView.setTag(mViewHolder);
@@ -55,15 +55,17 @@ public class ClienteListAdapter extends ArrayAdapter<Cliente> {
             result = convertView;
         }
 
-        mViewHolder.nome.setText(cliente.getNome());
-        mViewHolder.telefone.setText(cliente.getTelefone());
+        DecimalFormat formatValor = new DecimalFormat("#,##0.00");
+
+        mViewHolder.nome.setText(service.getName());
+        mViewHolder.valor.setText(service.getPrice());
 
         return convertView;
     }
 
     public static class ViewHolder {
         TextView nome;
-        TextView telefone;
+        TextView valor;
     }
 
 }

@@ -14,5 +14,6 @@
     <string name="text_button_main_add_service">Adicionar novo serviço</string>
     <string name="text_button_main_add_customer">Cadastrar cliente</string>
     <string name="text_button_main_add_schedule">Realizar agendamento</string>
+    <string name="time_format">dd/MM/yyyy hh:mm:ss </string>
 
 </resources>

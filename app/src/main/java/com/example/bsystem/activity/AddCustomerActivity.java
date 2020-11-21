@@ -2,43 +2,38 @@ package com.example.bsystem.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bsystem.R;
-import com.example.bsystem.model.Cliente;
+import com.example.bsystem.model.Customer;
 import com.example.bsystem.utils.TelefoneMaskUtil;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.NumberFormat;
 
+public class AddCustomerActivity extends AppCompatActivity implements View.OnClickListener {
 
-public class CadastroClienteActivity extends AppCompatActivity implements View.OnClickListener {
-
-    Cliente cliente;
+    Customer customer;
 
     private ViewHolder mViewHolder = new ViewHolder();
 
-    DatabaseReference refCliente;
+    DatabaseReference referenceCustomer;
     FirebaseDatabase database;
     //  FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_cliente);
+        setContentView(R.layout.activity_add_customer);
 
         database = FirebaseDatabase.getInstance();
-        refCliente = database.getReference("clientes");
+        referenceCustomer = database.getReference("customer");
         //  firebaseAuth = FirebaseAuth.getInstance();
 
 
@@ -66,8 +61,8 @@ public class CadastroClienteActivity extends AppCompatActivity implements View.O
     @NonNull
     @Override
     public String toString() {
-        if (CadastroClienteActivity.this.mViewHolder.editTelefone.length() == 10) {
-            CadastroClienteActivity.this.mViewHolder.editTelefone.addTextChangedListener(TelefoneMaskUtil.insert("(##)####-####", CadastroClienteActivity.this.mViewHolder.editTelefone));
+        if (AddCustomerActivity.this.mViewHolder.editTelefone.length() == 10) {
+            AddCustomerActivity.this.mViewHolder.editTelefone.addTextChangedListener(TelefoneMaskUtil.insert("(##)####-####", AddCustomerActivity.this.mViewHolder.editTelefone));
 
         }
         return super.toString();
@@ -75,13 +70,13 @@ public class CadastroClienteActivity extends AppCompatActivity implements View.O
 };*/
 
         Intent intent = getIntent();
-        cliente = (Cliente) intent.getSerializableExtra("cliente");
-        if (cliente != null) {
+        customer = (Customer) intent.getSerializableExtra("customer");
+        if (customer != null) {
 
-            this.mViewHolder.editNome.setText(cliente.getNome());
-            this.mViewHolder.editTelefone.setText(cliente.getTelefone());
-            this.mViewHolder.editData.setText(cliente.getNascimento());
-            this.mViewHolder.editEmail.setText(cliente.getEmail());
+            this.mViewHolder.editNome.setText(customer.getName());
+            this.mViewHolder.editTelefone.setText(customer.getPhone());
+            this.mViewHolder.editData.setText(customer.getBirthDate());
+            this.mViewHolder.editEmail.setText(customer.getEmail());
 
         }
 
@@ -102,23 +97,36 @@ public class CadastroClienteActivity extends AppCompatActivity implements View.O
             finish();
         }
         if (id == R.id.button_cadastro_cliente_confim) {
-            cadastrar();
+            register();
         }
     }
 
-    private void cadastrar() {
+    private void register() {
 
-        cliente = new Cliente();
+        String name = this.mViewHolder.editNome.getText().toString();
+        String phone = this.mViewHolder.editTelefone.getText().toString();
+        String birthDate = this.mViewHolder.editData.getText().toString();
+        String email = this.mViewHolder.editEmail.getText().toString();
 
-        cliente.setNome(this.mViewHolder.editNome.getText().toString());
-        cliente.setTelefone(this.mViewHolder.editTelefone.getText().toString());
-        cliente.setNascimento(this.mViewHolder.editData.getText().toString());
-        cliente.setEmail(this.mViewHolder.editEmail.getText().toString());
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "Preencher", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(this, "phone", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(birthDate)) {
+            Toast.makeText(this, "time", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "service", Toast.LENGTH_SHORT).show();
+        } else {
 
-        refCliente.child(cliente.getTelefone()).setValue(cliente);
+            String id = referenceCustomer.push().getKey();
 
-        Toast.makeText(this, "ok", Toast.LENGTH_LONG).show();
-        finish();
+            Customer customer = new Customer(id,name, phone, birthDate, email);
+            referenceCustomer.child(id).setValue(customer);
+
+            Toast.makeText(this, "Cadastro realizado com sucesso!", Toast.LENGTH_LONG).show();
+            finish();
+
+        }
     }
 
 

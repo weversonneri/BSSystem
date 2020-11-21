@@ -1,70 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context=".activity.CadastroClienteActivity">
+    tools:context=".activity.AddServiceActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="45dp">
+        android:padding="45dp"
+        tools:ignore="UselessParent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="Cadastrar Cliente"
+            android:text="Cadasto de serviços"
             android:textSize="25sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nome"
-            app:boxBackgroundMode="outline">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_cadastro_cliente_nome"
-                android:layout_width="match_parent"
-                android:layout_height="59dp"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Telefone"
-            app:boxBackgroundMode="outline">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_cadastro_cliente_telefone"
-                android:layout_width="match_parent"
-                android:layout_height="59dp"
-                android:inputType="number" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/outlinedTextField"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Data de Nascimento"
+            android:hint="Descrição do Serviço"
+            app:errorEnabled="true"
             app:boxBackgroundMode="outline">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_cadastro_cliente_data"
+                android:id="@+id/edit_service_add_service"
                 android:layout_width="match_parent"
-                android:layout_height="59dp"
-                android:inputType="number" />
+                android:layout_height="59dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,31 +40,56 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            app:counterTextColor="@color/colorPrimaryDark">
+            android:hint="Tipo de Serviço">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_cadastro_cliente_email"
+                android:id="@+id/edit_service_add_type"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:layout_height="wrap_content" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="30dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
+            android:hint="Valor">
+
+            <me.abhinay.input.CurrencyEditText
+                android:id="@+id/edit_service_add_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Observações">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_service_add_observation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="right"
             android:orientation="horizontal">
 
-
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_cadastro_cliente_cancel"
+                android:id="@+id/button_service_add_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cancelar"
@@ -107,13 +100,13 @@
                 android:layout_height="10dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_cadastro_cliente_confim"
+                android:id="@+id/button_service_add_confirm"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Salvar" />
-
 
         </LinearLayout>
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
