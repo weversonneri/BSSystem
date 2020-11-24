@@ -13,6 +13,8 @@ public class Service implements Serializable {
     public Service() {
     }
 
+
+
     public Service(String id, String name, String type, String price, String observation) {
         this.id = id;
         this.name = name;

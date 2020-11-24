@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,17 +7,39 @@
     tools:context=".activity.AddScheduleActivity">
 
     <LinearLayout
+        android:id="@+id/schedule_add_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/lightGray"
+            android:theme="@style/ThemeOverlay.AppCompat.Light">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/add_schedule_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="Agendamento" />
+        </com.google.android.material.appbar.AppBarLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/schedule_add_toolbar"
         android:orientation="vertical"
         android:padding="45dp">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_schedule_add_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nome"
-            app:endIconMode="clear_text">
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_schedule_add_name"
@@ -27,10 +49,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_schedule_add_phone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Telefone">
+            android:hint="Telefone"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_schedule_add_phone"
@@ -45,12 +69,13 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_schedule_add_time"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".80"
-                app:startIconDrawable="@drawable/ic_calendar"
-                android:hint="Horario">
+                android:hint="Horario"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_schedule_add_time"
@@ -67,15 +92,17 @@
                 android:layout_weight=".20"
                 android:padding="15dp"
                 android:src="@drawable/ic_calendar"
-                app:tint="@color/colorAccent" />
+                app:tint="@color/primaryDarkColor" />
 
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_schedule_add_service"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Serviço">
+            android:hint="Serviço"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_schedule_add_service"
@@ -116,43 +143,43 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
+        <!---
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/button_schedule_add_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/primaryDarkColor"
+                        android:padding="15dp"
+                        android:text="Editar"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"
+                        android:visibility="invisible" />
 
-            <Button
-                android:id="@+id/button_schedule_add_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/primaryDarkColor"
-                android:padding="15dp"
-                android:text="Editar"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:visibility="invisible" />
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
 
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="10dp" />
+                    <Button
+                        android:id="@+id/button_schedule_add_delete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="15dp"
+                        android:text="Deletar"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"
+                        android:visibility="invisible" />
 
-            <Button
-                android:id="@+id/button_schedule_add_delete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="15dp"
-                android:text="Deletar"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:visibility="invisible" />
-
-        </LinearLayout>
+                </LinearLayout>-->
 
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

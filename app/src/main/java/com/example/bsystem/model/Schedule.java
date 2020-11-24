@@ -13,7 +13,13 @@ public class Schedule implements Serializable {
     public Schedule() {
     }
 
-    public Schedule( String id, String name, String phone, String time, String service) {
+    public Schedule(String id, String time, String service) {
+        this.id = id;
+        this.time = time;
+        this.service = service;
+    }
+
+    public Schedule(String id, String name, String phone, String time, String service) {
         this.id = id;
         this.name = name;
         this.phone = phone;

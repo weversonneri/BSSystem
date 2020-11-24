@@ -45,7 +45,7 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
         this.mViewHolder.editValor = findViewById(R.id.edit_service_add_price);
         this.mViewHolder.editObservacao = findViewById(R.id.edit_service_add_observation);
 
-        this.mViewHolder.buttonCadastro = findViewById(R.id.button_service_add_confirm);
+        this.mViewHolder.buttonCadastro = findViewById(R.id.button_service_add_submit);
         this.mViewHolder.buttonCancel = findViewById(R.id.button_service_add_cancel);
 
         this.mViewHolder.buttonCancel.setOnClickListener(this);
@@ -78,7 +78,7 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
         if (id == R.id.button_service_add_cancel) {
             finish();
         }
-        if (id == R.id.button_service_add_confirm) {
+        if (id == R.id.button_service_add_submit) {
             cadastrar();
         }
     }
@@ -92,8 +92,9 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
 
 
         if (TextUtils.isEmpty(name)) {
-            this.mViewHolder.editDescricao.setError("sd");
-            Toast.makeText(this, "Preencher", Toast.LENGTH_SHORT).show();
+            this.mViewHolder.editDescricao.setError("Campo obrigatório");
+            this.mViewHolder.editDescricao.requestFocus();
+            return;
         } else if (TextUtils.isEmpty(type)) {
             Toast.makeText(this, "phone", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(price)) {

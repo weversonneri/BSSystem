@@ -4,16 +4,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.bsystem.R;
 import com.example.bsystem.model.Schedule;
+import com.example.bsystem.utils.TelefoneMaskUtil;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -25,13 +33,12 @@ import java.util.List;
 
 public class AddScheduleActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, DialogInterface.OnCancelListener {
 
-    Schedule schedule;
-
     private ViewHolder mViewHolder = new ViewHolder();
 
     FirebaseDatabase database;
     DatabaseReference referenceSchedule;
 
+    String _ID, _NAME, _PHONE, _TIME, _SERVICE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +49,20 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
         database = FirebaseDatabase.getInstance();
         referenceSchedule = database.getReference("schedule");
 
+        this.mViewHolder.toolbar = findViewById(R.id.add_schedule_toolbar);
+        setSupportActionBar(this.mViewHolder.toolbar);
 
         this.mViewHolder.editScheduleAddName = findViewById(R.id.edit_schedule_add_name);
         this.mViewHolder.editScheduleAddPhone = findViewById(R.id.edit_schedule_add_phone);
         this.mViewHolder.editScheduleAddTime = findViewById(R.id.edit_schedule_add_time);
-
         this.mViewHolder.imageScheduleAddTime = findViewById(R.id.image_schedule_add_time);
-
         this.mViewHolder.editScheduleAddService = findViewById(R.id.edit_schedule_add_service);
 
-        this.mViewHolder.buttonScheduleAddDelete = findViewById(R.id.button_schedule_add_delete);
-        this.mViewHolder.buttonScheduleAddEdit = findViewById(R.id.button_schedule_add_edit);
+        this.mViewHolder.layoutScheduleAddName = findViewById(R.id.layout_schedule_add_name);
+        this.mViewHolder.layoutScheduleAddPhone = findViewById(R.id.layout_schedule_add_phone);
+        this.mViewHolder.layoutScheduleAddTime = findViewById(R.id.layout_schedule_add_time);
+        this.mViewHolder.layoutScheduleAddService = findViewById(R.id.layout_schedule_add_service);
+
         this.mViewHolder.buttonScheduleAddSubmit = findViewById(R.id.button_schedule_add_submit);
         this.mViewHolder.buttonScheduleAddCancel = findViewById(R.id.button_schedule_add_cancel);
 
@@ -62,24 +72,23 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
 
         this.mViewHolder.imageScheduleAddTime.setOnClickListener(this);
 
-        this.mViewHolder.buttonScheduleAddDelete.setOnClickListener(this);
-        this.mViewHolder.buttonScheduleAddEdit.setOnClickListener(this);
+
         this.mViewHolder.buttonScheduleAddSubmit.setOnClickListener(this);
         this.mViewHolder.buttonScheduleAddCancel.setOnClickListener(this);
 
-      /*  this.mViewHolder.editScheduleAddPhone.addTextChangedListener(TelefoneMaskUtil.insert("(##)#####-####", this.mViewHolder.editScheduleAddPhone));
-        //this.mViewHolder.editScheduleAddTime.addTextChangedListener(TelefoneMaskUtil.insert("##:##", this.mViewHolder.editScheduleAddTime));
-*/
-/***********************************************************************************************************************************/
+        this.mViewHolder.editScheduleAddPhone.addTextChangedListener(TelefoneMaskUtil.insert("(##)#####-####", this.mViewHolder.editScheduleAddPhone));
 
+        showData();
+/***********************************************************************************************************************************/
+    }
+
+    private void showData() {
         Intent intent = getIntent();
         Schedule schedule = (Schedule) intent.getSerializableExtra("schedule");
         if (schedule != null) {
 
             this.mViewHolder.buttonScheduleAddSubmit.setVisibility(View.INVISIBLE);
             this.mViewHolder.buttonScheduleAddCancel.setVisibility(View.INVISIBLE);
-            this.mViewHolder.buttonScheduleAddEdit.setVisibility(View.VISIBLE);
-            this.mViewHolder.buttonScheduleAddDelete.setVisibility(View.VISIBLE);
 
             this.mViewHolder.imageScheduleAddTime.setEnabled(false);
 
@@ -88,10 +97,16 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
             this.mViewHolder.editScheduleAddTime.setEnabled(false);
             this.mViewHolder.editScheduleAddService.setEnabled(false);
 
-            this.mViewHolder.editScheduleAddName.setText(schedule.getName());
-            this.mViewHolder.editScheduleAddPhone.setText(schedule.getPhone());
-            this.mViewHolder.editScheduleAddTime.setText(schedule.getTime());
-            this.mViewHolder.editScheduleAddService.setText(schedule.getService());
+            _ID = schedule.getId();
+            _NAME = schedule.getName();
+            _PHONE = schedule.getPhone();
+            _TIME = schedule.getTime();
+            _SERVICE = schedule.getService();
+
+            this.mViewHolder.editScheduleAddName.setText(_NAME);
+            this.mViewHolder.editScheduleAddPhone.setText(_PHONE);
+            this.mViewHolder.editScheduleAddTime.setText(_TIME);
+            this.mViewHolder.editScheduleAddService.setText(_SERVICE);
 
         }
     }
@@ -157,45 +172,29 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.button_schedule_add_submit) {
-            register();
-        }
-        if (v.getId() == R.id.button_schedule_add_cancel) {
-            finish();
-        }
-        if (v.getId() == R.id.button_schedule_add_edit) {
-            scheduleEdit(v);
-        }
-        if (v.getId() == R.id.image_schedule_add_time) {
-            scheduleTest(v);
-        }
-        if (v.getId() == R.id.edit_schedule_add_time) {
-            scheduleTest(v);
-        }
-        if (v.getId() == R.id.button_schedule_add_delete) {
-          /*  refSchedule.child(String.valueOf(schedule.getName())).removeValue();
-
-            DatabaseReference uR = FirebaseDatabase.getInstance().getReference("schedule").child(name);
-            uR.removeValue();*/
-
-            finish();
+        switch (v.getId()) {
+            case R.id.button_schedule_add_submit:
+                register();
+                break;
+            case R.id.button_schedule_add_cancel:
+                finish();
+                break;
+            case R.id.image_schedule_add_time:
+                scheduleTest(v);
+                break;
         }
 
     }
 
-    private void scheduleEdit(View v) {
+    private void scheduleEdit() {
 
         this.mViewHolder.buttonScheduleAddSubmit.setVisibility(View.VISIBLE);
         this.mViewHolder.buttonScheduleAddCancel.setVisibility(View.VISIBLE);
-        this.mViewHolder.buttonScheduleAddEdit.setVisibility(View.INVISIBLE);
-        this.mViewHolder.buttonScheduleAddDelete.setVisibility(View.INVISIBLE);
 
         this.mViewHolder.buttonScheduleAddSubmit.setText("Salvar");
 
         this.mViewHolder.imageScheduleAddTime.setEnabled(true);
 
-        this.mViewHolder.editScheduleAddName.setEnabled(true);
-        this.mViewHolder.editScheduleAddPhone.setEnabled(true);
         this.mViewHolder.editScheduleAddTime.setEnabled(true);
         this.mViewHolder.editScheduleAddService.setEnabled(true);
 
@@ -207,22 +206,59 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
         String time = this.mViewHolder.editScheduleAddTime.getText().toString();
         String service = this.mViewHolder.editScheduleAddService.getText().toString();
 
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(this, "Preencher", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(phone)) {
-            Toast.makeText(this, "phone", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(time)) {
-            Toast.makeText(this, "time", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(service)) {
-            Toast.makeText(this, "service", Toast.LENGTH_SHORT).show();
-        } else {
-            String id = referenceSchedule.push().getKey();
 
-            Schedule schedule = new Schedule(id, name, phone, time, service);
-            referenceSchedule.child(id).setValue(schedule);
-            Toast.makeText(this, "Agendamento realizado com sucesso!", Toast.LENGTH_SHORT).show();
-            finish();
+        if (TextUtils.isEmpty(name)) {
+            this.mViewHolder.layoutScheduleAddName.setError("* Campo obrigatório");
+        } else {
+            this.mViewHolder.layoutScheduleAddName.setError(null);
         }
+        if (TextUtils.isEmpty(phone)) {
+            this.mViewHolder.layoutScheduleAddPhone.setError("* Campo obrigatório");
+        }else if (phone.length() < 14) {
+            this.mViewHolder.layoutScheduleAddPhone.setError("Telefone inválido");
+        } else {
+            this.mViewHolder.layoutScheduleAddPhone.setError(null);
+        }
+        if (TextUtils.isEmpty(time)) {
+            this.mViewHolder.layoutScheduleAddTime.setError("* Campo obrigatório");
+        } else {
+            this.mViewHolder.layoutScheduleAddTime.setError(null);
+        }
+        if (TextUtils.isEmpty(service)) {
+            this.mViewHolder.layoutScheduleAddService.setError("* Campo obrigatório");
+        } else {
+            if (_ID == null) {
+                String id = referenceSchedule.push().getKey();
+
+                Schedule schedule = new Schedule(id, name, phone, time, service);
+                referenceSchedule.child(id).setValue(schedule).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AddScheduleActivity.this, "Agendamento realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                            finish();
+
+                        } else {
+                            Toast.makeText(AddScheduleActivity.this, "ERRO", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            } else {
+                update();
+            }
+        }
+    }
+
+    private void update() {
+        // Schedule schedule = new Schedule(_ID, _TIME, _SERVICE);
+        referenceSchedule.child(_ID).child("service").setValue(this.mViewHolder.editScheduleAddService.getText().toString());
+        _SERVICE = this.mViewHolder.editScheduleAddService.getText().toString();
+        referenceSchedule.child(_ID).child("time").setValue(this.mViewHolder.editScheduleAddTime.getText().toString());
+        _TIME = this.mViewHolder.editScheduleAddTime.getText().toString();
+
+        Toast.makeText(this, "Dados atualizados", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     /***********************************************************************************************************************************/
@@ -271,6 +307,39 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
 
     /***********************************************************************************************************************************/
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.edit_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_edit:
+
+                scheduleEdit();
+                return true;
+
+            case R.id.menu_item_remove:
+                referenceSchedule.child(_ID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AddScheduleActivity.this, "Agendamento deletado", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(AddScheduleActivity.this, "Erro", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                finish();
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     public static class ViewHolder {
         TextInputEditText editScheduleAddName;
@@ -279,12 +348,15 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
 
         TextInputEditText editScheduleAddService;
 
+        TextInputLayout layoutScheduleAddName, layoutScheduleAddPhone, layoutScheduleAddTime, layoutScheduleAddService;
+
         ImageView imageScheduleAddTime;
 
-        Button buttonScheduleAddDelete;
-        Button buttonScheduleAddEdit;
         Button buttonScheduleAddSubmit;
         Button buttonScheduleAddCancel;
+
+        Toolbar toolbar;
+
 
     }
 }

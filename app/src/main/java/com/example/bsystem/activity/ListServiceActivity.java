@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ListServicosActivity extends AppCompatActivity {
+public class ListServiceActivity extends AppCompatActivity {
 
     ArrayList<Service> arrayList;
 
@@ -47,7 +47,7 @@ public class ListServicosActivity extends AppCompatActivity {
         this.mViewHolder.buttonCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListServicosActivity.this, AddServiceActivity.class);
+                Intent intent = new Intent(ListServiceActivity.this, AddServiceActivity.class);
                 startActivity(intent);
             }
         });
@@ -63,8 +63,8 @@ public class ListServicosActivity extends AppCompatActivity {
                     arrayList.add(service);
 
                 }
-                ServiceAdapter arrayAdapter = new ServiceAdapter(ListServicosActivity.this, R.layout.layout_list_service, arrayList);
-                ListServicosActivity.this.mViewHolder.listView.setAdapter(arrayAdapter);
+                ServiceAdapter arrayAdapter = new ServiceAdapter(ListServiceActivity.this, R.layout.layout_list_service, arrayList);
+                ListServiceActivity.this.mViewHolder.listView.setAdapter(arrayAdapter);
             }
 
             @Override
@@ -79,7 +79,7 @@ public class ListServicosActivity extends AppCompatActivity {
 
                 Service selectService = (Service) adapterView.getItemAtPosition(position);
 
-                Intent intent = new Intent(ListServicosActivity.this, AddServiceActivity.class);
+                Intent intent = new Intent(ListServiceActivity.this, AddServiceActivity.class);
                 intent.putExtra("services", selectService);
                 startActivity(intent);
 

@@ -21,14 +21,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ListClienteActivity extends AppCompatActivity {
+public class ListCustomerActivity extends AppCompatActivity {
 
     private ViewHolder mViewHolder = new ViewHolder();
 
     ArrayList<Customer> arrayList;
 
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference refCliente;
+    DatabaseReference referenceCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class ListClienteActivity extends AppCompatActivity {
 
         arrayList = new ArrayList<>();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        refCliente = firebaseDatabase.getReference("clientes");
+        referenceCustomer = firebaseDatabase.getReference("customer");
 
         this.mViewHolder.listView = findViewById(R.id.list_clientes);
 
@@ -45,12 +45,12 @@ public class ListClienteActivity extends AppCompatActivity {
         this.mViewHolder.buttonCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListClienteActivity.this, AddCustomerActivity.class);
+                Intent intent = new Intent(ListCustomerActivity.this, AddCustomerActivity.class);
                 startActivity(intent);
             }
         });
 
-        refCliente.addValueEventListener(new ValueEventListener() {
+        referenceCustomer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -60,8 +60,8 @@ public class ListClienteActivity extends AppCompatActivity {
                     Customer customer = dataSnapshot.getValue(Customer.class);
                     arrayList.add(customer);
                 }
-                CustomerAdapter arrayAdapter = new CustomerAdapter(ListClienteActivity.this, R.layout.layout_list_cliente, arrayList);
-                ListClienteActivity.this.mViewHolder.listView.setAdapter(arrayAdapter);
+                CustomerAdapter arrayAdapter = new CustomerAdapter(ListCustomerActivity.this, R.layout.layout_list_customer, arrayList);
+                ListCustomerActivity.this.mViewHolder.listView.setAdapter(arrayAdapter);
 
             }
 
@@ -77,7 +77,7 @@ public class ListClienteActivity extends AppCompatActivity {
 
                 Customer selectCustomer = (Customer) adapterView.getItemAtPosition(position);
 
-                Intent intent = new Intent(ListClienteActivity.this, AddCustomerActivity.class);
+                Intent intent = new Intent(ListCustomerActivity.this, AddCustomerActivity.class);
                 intent.putExtra("customer", selectCustomer);
 
                 startActivity(intent);

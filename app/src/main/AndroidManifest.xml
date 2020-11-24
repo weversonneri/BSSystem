@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp">
-        <activity android:name=".activity.ListServicosActivity"></activity>
-        <activity android:name=".activity.ListClienteActivity" />
+        <activity android:name=".activity.ListServiceActivity"></activity>
+        <activity android:name=".activity.ListCustomerActivity" />
         <activity android:name=".activity.AddServiceActivity" />
         <activity android:name=".activity.AddCustomerActivity" />
         <activity android:name=".activity.AddScheduleActivity" />
-        <activity android:name=".activity.CadastroActivity" />
+        <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>

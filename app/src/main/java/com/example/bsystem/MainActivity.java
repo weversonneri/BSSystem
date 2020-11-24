@@ -2,6 +2,8 @@ package com.example.bsystem;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -11,13 +13,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import com.example.bsystem.activity.ListClienteActivity;
-import com.example.bsystem.activity.ListServicosActivity;
 import com.example.bsystem.activity.AddScheduleActivity;
+import com.example.bsystem.activity.ListCustomerActivity;
+import com.example.bsystem.activity.ListServiceActivity;
 import com.example.bsystem.adapter.ScheduleAdapter;
 import com.example.bsystem.model.Schedule;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean isOpen;
 
+    private FirebaseAuth mAuth;
+
     FirebaseDatabase database;
     DatabaseReference refSchedule;
 
@@ -46,8 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         arrayList = new ArrayList<>();
 
+        mAuth = FirebaseAuth.getInstance();
+
         database = FirebaseDatabase.getInstance();
         refSchedule = database.getReference("schedule");
+
+        this.mViewHolder.toolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(this.mViewHolder.toolbar);
 
         this.mViewHolder.listView = findViewById(R.id.list_schedule);
 
@@ -111,6 +123,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
 
     @Override
     public void onClick(View v) {
@@ -152,14 +171,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_main_add_customer:
-                startActivity(new Intent(MainActivity.this, ListClienteActivity.class));
+                startActivity(new Intent(MainActivity.this, ListCustomerActivity.class));
                 break;
 
             case R.id.button_main_add_service:
-                startActivity(new Intent(MainActivity.this, ListServicosActivity.class));
+                startActivity(new Intent(MainActivity.this, ListServiceActivity.class));
                 break;
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.main_menu_item_signOut:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
+        if (currentUser != null) {
+
+        } else {
+            finish();
+        }
     }
 
     public static class ViewHolder {
@@ -171,6 +216,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FloatingActionButton buttonMainAddService;
 
         TextView textMainAddSchedule, textMainAddCustomer, textMainAddService;
+
+        Toolbar toolbar;
 
     }
 }

@@ -14,5 +14,9 @@
     <style name="Theme.MyApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
+    <style name="inputError" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+        <item name="errorTextColor">@color/colorError</item>
+    </style>
+
 
 </resources>

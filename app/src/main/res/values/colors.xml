@@ -9,5 +9,8 @@
     <color name="primaryDarkColor">#62757f</color>
     <color name="primaryTextColor">#000000</color>
 
+    <color name="colorError">#FFDA0303</color>
+
+
     <color name="lightGray">#ededed</color>
 </resources>
