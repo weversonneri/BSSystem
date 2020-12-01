@@ -16,6 +16,7 @@ import com.example.bsystem.MainActivity;
 import com.example.bsystem.R;
 import com.example.bsystem.model.Schedule;
 import com.example.bsystem.model.User;
+import com.example.bsystem.utils.TelefoneMaskUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -50,7 +51,19 @@ public class RegisterActivity extends AppCompatActivity {
         this.mViewHolder.editRegisterAddPhone = findViewById(R.id.edit_register_add_phone);
         this.mViewHolder.editRegisterAddPassword = findViewById(R.id.edit_register_add_password);
 
+        this.mViewHolder.cancel = findViewById(R.id.button_register_add_cancel);
+
         this.mViewHolder.submit = findViewById(R.id.button_register_add_submit);
+
+
+        this.mViewHolder.editRegisterAddPhone.addTextChangedListener(TelefoneMaskUtil.insert("(##)#####-####", this.mViewHolder.editRegisterAddPhone));
+
+        this.mViewHolder.cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         this.mViewHolder.submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,45 +109,48 @@ public class RegisterActivity extends AppCompatActivity {
         }else if (password.length() < 6){
             Toast.makeText(this, "menor q seis", Toast.LENGTH_SHORT).show();
         } else {
-            String id = referenceUser.push().getKey();
 
-            User user = new User(id, name, phone, email);
-            referenceUser.child(id).setValue(user);
-            Toast.makeText(this, "Usuario cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                                String id = user.getUid();
+                                User user1 = new User(id, name, phone, email);
+                                referenceUser.child(user.getUid()).setValue(user1);
+                                Toast.makeText(RegisterActivity.this, "Usuario cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
 
-            registerUser();
-            finish();
+                                //registerUser();
+                                finish();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
+
+                            // ...
+                        }
+                    });
+
+
         }
 
 
     }
 
-    private void registerUser() {
+   /* private void registerUser() {
 
         String email = this.mViewHolder.editRegisterAddEmail.getText().toString();
         String password = this.mViewHolder.editRegisterAddPassword.getText().toString();
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
 
-                        // ...
-                    }
-                });
-    }
+    }*/
 
 
     /* public void showDialog() {
@@ -156,7 +172,7 @@ public class RegisterActivity extends AppCompatActivity {
     public static class ViewHolder {
 
         TextInputEditText editRegisterAddName, editRegisterAddEmail, editRegisterAddPhone, editRegisterAddPassword;
-        Button submit;
+        Button submit, cancel;
 
 
     }

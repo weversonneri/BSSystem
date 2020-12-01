@@ -7,47 +7,40 @@
     tools:context=".activity.AddServiceActivity">
 
     <LinearLayout
-        android:id="@+id/schedule_add_toolbar"
+        android:id="@+id/service_add_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            android:backgroundTint="@color/lightGray">
+            android:backgroundTint="@color/lightGray"
+            android:theme="@style/ThemeOverlay.AppCompat.Light">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/main_toolbar"
+                android:id="@+id/add_service_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
+                android:layout_height="?attr/actionBarSize"
+                app:title="Cadastrar serviço" />
         </com.google.android.material.appbar.AppBarLayout>
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/service_add_toolbar"
         android:orientation="vertical"
-        android:layout_below="@+id/schedule_add_toolbar"
         android:padding="45dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Cadasto de serviços"
-            android:textSize="25sp" />
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextField"
+            android:id="@+id/layout_service_add_service"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descrição do Serviço"
-            app:errorEnabled="true"
-            app:boxBackgroundMode="outline">
+            app:boxBackgroundMode="outline"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_service_add_service"
@@ -57,9 +50,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_service_add_type"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             android:hint="Tipo de Serviço">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -71,27 +66,32 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_service_add_price"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Valor"
             app:counterEnabled="true"
             app:counterMaxLength="10"
-            android:hint="Valor">
+            app:errorEnabled="true">
 
             <me.abhinay.input.CurrencyEditText
                 android:id="@+id/edit_service_add_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:maxLength="11"
+                android:inputType="number" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_service_add_observation"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Observações">
+            android:hint="Observações"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_service_add_observation"
@@ -108,7 +108,7 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/button_service_add_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,11 +119,11 @@
                 android:layout_width="10dp"
                 android:layout_height="10dp" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/button_service_add_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Salvar" />
+                android:text="Cadastrar" />
 
         </LinearLayout>
     </LinearLayout>

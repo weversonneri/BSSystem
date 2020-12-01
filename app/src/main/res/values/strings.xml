@@ -11,9 +11,10 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="text_button_main_add_service">Adicionar novo serviço</string>
+    <string name="text_button_main_add_service">Cadatrar novo serviço</string>
     <string name="text_button_main_add_customer">Cadastrar cliente</string>
     <string name="text_button_main_add_schedule">Realizar agendamento</string>
     <string name="time_format">dd/MM/yyyy hh:mm:ss </string>
+
 
 </resources>

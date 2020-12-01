@@ -97,6 +97,8 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
             this.mViewHolder.editScheduleAddTime.setEnabled(false);
             this.mViewHolder.editScheduleAddService.setEnabled(false);
 
+            this.mViewHolder.toolbar.setTitle("Agendamento");
+
             _ID = schedule.getId();
             _NAME = schedule.getName();
             _PHONE = schedule.getPhone();
@@ -207,24 +209,15 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
         String service = this.mViewHolder.editScheduleAddService.getText().toString();
 
 
-        if (TextUtils.isEmpty(name)) {
+        if (name.length() == 0) {
             this.mViewHolder.layoutScheduleAddName.setError("* Campo obrigatório");
-        } else {
-            this.mViewHolder.layoutScheduleAddName.setError(null);
-        }
-        if (TextUtils.isEmpty(phone)) {
+        } else  if (TextUtils.isEmpty(phone)) {
             this.mViewHolder.layoutScheduleAddPhone.setError("* Campo obrigatório");
         }else if (phone.length() < 14) {
             this.mViewHolder.layoutScheduleAddPhone.setError("Telefone inválido");
-        } else {
-            this.mViewHolder.layoutScheduleAddPhone.setError(null);
-        }
-        if (TextUtils.isEmpty(time)) {
+        } else if (TextUtils.isEmpty(time)) {
             this.mViewHolder.layoutScheduleAddTime.setError("* Campo obrigatório");
-        } else {
-            this.mViewHolder.layoutScheduleAddTime.setError(null);
-        }
-        if (TextUtils.isEmpty(service)) {
+        } else if (TextUtils.isEmpty(service)) {
             this.mViewHolder.layoutScheduleAddService.setError("* Campo obrigatório");
         } else {
             if (_ID == null) {

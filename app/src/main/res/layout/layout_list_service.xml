@@ -22,7 +22,7 @@
             android:text=""
             android:textAlignment="textStart"
             android:textColor="@color/colorAccent"
-            android:textSize="23sp"
+            android:textSize="18sp"
             tools:ignore="RtlCompat" />
 
 
@@ -37,7 +37,7 @@
         android:layout_weight="66.6"
         android:text=""
         android:textAlignment="textStart"
-        android:textSize="28sp"
+        android:textSize="20sp"
         tools:ignore="RtlCompat" />
 
 

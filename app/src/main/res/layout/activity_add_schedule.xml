@@ -22,7 +22,7 @@
                 android:id="@+id/add_schedule_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Agendamento" />
+                app:title="Realizar Agendamento" />
         </com.google.android.material.appbar.AppBarLayout>
     </LinearLayout>
 

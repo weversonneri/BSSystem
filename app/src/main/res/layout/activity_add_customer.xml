@@ -19,18 +19,18 @@
             android:theme="@style/ThemeOverlay.AppCompat.Light">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/add_schedule_toolbar"
+                android:id="@+id/add_custome_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Cliente" />
+                app:title="Cadastrar cliente" />
         </com.google.android.material.appbar.AppBarLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_below="@id/customer_add_toolbar"
+        android:orientation="vertical"
         android:padding="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,14 +38,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_customer_add_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nome"
-            app:boxBackgroundMode="outline">
+            app:boxBackgroundMode="outline"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_cadastro_cliente_nome"
+                android:id="@+id/edit_customer_add_name"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:inputType="text" />
@@ -54,14 +56,16 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_customer_add_phone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Telefone"
-            app:boxBackgroundMode="outline">
+            app:boxBackgroundMode="outline"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_cadastro_cliente_telefone"
+                android:id="@+id/edit_customer_add_phone"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:inputType="number" />
@@ -69,15 +73,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextField"
+            android:id="@+id/layout_customer_add_birthDate"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Data de Nascimento"
-            app:boxBackgroundMode="outline">
+            app:boxBackgroundMode="outline"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_calendar">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_cadastro_cliente_data"
+                android:id="@+id/edit_customer_add_birthDate"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:inputType="number" />
@@ -85,14 +91,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_customer_add_email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            app:counterTextColor="@color/colorPrimaryDark">
+            app:counterTextColor="@color/colorPrimaryDark"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_cadastro_cliente_email"
+                android:id="@+id/edit_customer_add_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress" />
@@ -102,7 +110,7 @@
 
         <Space
             android:layout_width="10dp"
-            android:layout_height="30dp" />
+            android:layout_height="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,8 +119,8 @@
             android:orientation="horizontal">
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_cadastro_cliente_cancel"
+            <Button
+                android:id="@+id/button_customer_add_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cancelar"
@@ -122,11 +130,11 @@
                 android:layout_width="10dp"
                 android:layout_height="10dp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_cadastro_cliente_confim"
+            <Button
+                android:id="@+id/button_customer_add_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Salvar" />
+                android:text="Cadastrar" />
 
 
         </LinearLayout>
