@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/paper"
+
     tools:context=".activity.LoginActivity">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -37,6 +40,9 @@
                 android:layout_height="wrap_content"
                 android:hint="Email"
                 app:errorEnabled="true"
+                app:boxStrokeColor="@color/paleGold"
+                app:startIconTint="@color/charcoal"
+                app:hintTextColor="@color/paleGold"
                 app:startIconDrawable="@drawable/ic_mail">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -44,7 +50,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="" />
+                    android:text=""
+                    android:textCursorDrawable="@drawable/color_cursor" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -54,7 +61,11 @@
                 android:layout_height="wrap_content"
                 android:hint="Senha"
                 app:endIconMode="password_toggle"
+                app:startIconTint="@color/charcoal"
                 app:errorEnabled="true"
+                app:boxStrokeColor="@color/paleGold"
+                app:endIconTint="@color/paleGold"
+                app:hintTextColor="@color/paleGold"
                 app:startIconDrawable="@drawable/ic_password">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -62,7 +73,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:text="" />
+                    android:text=""
+                    android:textCursorDrawable="@drawable/color_cursor" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -72,7 +84,8 @@
                 android:layout_marginTop="50dp"
                 android:padding="15dp"
                 android:text="Entrar"
-                android:textColor="@android:color/white"
+                android:backgroundTint="@color/charcoal"
+                android:textColor="@color/silk"
                 android:textSize="15sp" />
 
             <TextView
